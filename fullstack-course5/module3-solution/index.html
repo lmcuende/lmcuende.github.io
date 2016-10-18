@@ -14,7 +14,7 @@
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
     <div class="form-group">
-      <input type="text" class="form-control" ng-model="ctrl.searchTerm" placeholder="search term">
+      <input type="text" class="form-control" ng-model="ctrl.searchTerm" placeholder="search term" ng-valid ng-dirty ng-touched ng-empty>
     </div>
     <div class="form-group narrow-button">
       <button class="btn btn-primary" ng-click="ctrl.getResults();">Narrow It Down For Me!</button>
@@ -24,7 +24,23 @@
     <items-loader-indicator></items-loader-indicator>
 
     <!-- found-items should be implemented as a component -->
-    <found-items found-items="ctrl.items" on-remove="ctrl.removeItem(index)"></found-items>
+    <found-items found-items="ctrl.items" on-remove="ctrl.removeItem(index)">
+      <div class="row">
+        <ol>
+          <li ng-repeat="item in ctrl.items">
+            <div class="list-group">
+              <ul class="list-group-item" style="list-style-type:none">
+                <li class="list-group-item-heading ng-binding">
+                  {{ ctrl.items.id }}   {{ ctrl.items.short_name }}
+                </li>
+              </ul>
+            </div>
+
+          </li>
+        </ol>
+      </div>
+
+    </found-items>
     <div class="error" ng-if="ctrl.errorMessage">{{ ctrl.errorMessage }}</div>
   </div>
 

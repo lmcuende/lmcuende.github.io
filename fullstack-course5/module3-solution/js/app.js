@@ -23,9 +23,9 @@
 
   NarrowItDownController.$inject = ['MenuSearchService'];
   function NarrowItDownController(MenuSearchService) {
-    var controller = this;
+    var ctrl = this;
 
-    controller.getResults = function() {
+    ctrl.getResults = function() {
         var promise = MenuSearchService.getMatchedMenuItems(ctrl.searchTerm);
 
         promise.then( function (response) {
