@@ -14,8 +14,6 @@
 
 
   narrowItDown.clicked = function(searchterm) {
-      console.log("click working");
-      //console.log(searchterm);
       if ($scope.searchterm=="" || $scope.searchterm == undefined) {
         $scope.message= "Found Nothing";
         MenuSearchService.getMatchedMenuItems(searchterm).then(function(response) {
