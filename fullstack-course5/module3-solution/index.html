@@ -1,48 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app="NarrowItDownApp">
   <head>
     <title>Narrow Down Your Menu Choice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="js/jquery-3.1.0.min.js"></script>
-    <script src="js/angular.min.js"></script>
-    <script src="js/app.js"></script>
   </head>
-<body ng-app="NarrowItDownApp">
-   <div class="container" ng-controller="NarrowItDownController as ctrl">
+<body ng-controller="NarrowItDownController as narrowItDown">>
+   <div class="container">
     <h1>Narrow Down Your Chinese Menu Choice</h1>
 
-    <div class="form-group">
-      <input type="text" class="form-control" ng-model="ctrl.searchTerm" placeholder="search term" ng-valid ng-dirty ng-touched ng-empty>
-    </div>
-    <div class="form-group narrow-button">
-      <button class="btn btn-primary" ng-click="ctrl.getResults();">Narrow It Down For Me!</button>
-    </div>
+        <div class="form-group">
+          <input type="text" class="form-control" ng-model="searchterm" placeholder="search term">
+        </div>
+        <div class="form-group narrow-button">
+          <button class="btn btn-primary" ng-click="narrowItDown.clicked(searchterm);">Narrow It Down For Me!</button>
+        </div>
+        <!-- Bonus loader (see Bonus section of the assignment) -->
 
-    <!-- Bonus loader (see Bonus section of the assignment) -->
-    <items-loader-indicator></items-loader-indicator>
 
-    <!-- found-items should be implemented as a component -->
-    <found-items found-items="ctrl.items" on-remove="ctrl.removeItem(index)">
-      <div class="row">
-        <ol>
-          <li ng-repeat="item in ctrl.items">
-            <div class="list-group">
-              <ul class="list-group-item" style="list-style-type:none">
-                <li class="list-group-item-heading ng-binding">
-                  {{ ctrl.items.id }}   {{ ctrl.items.short_name }}
-                </li>
-              </ul>
-            </div>
+        <!-- found-items should be implemented as a component -->
+        <div class="form-group message, container">{{ message }}</div>
+        <found-items
+          my-list="narrowItDown"
+          on-remove="narrowItDown.ItemRemoved(index)"
+          class="ng-isolate-scope">
+        </found-items>
 
-          </li>
-        </ol>
-      </div>
 
-    </found-items>
-    <div class="error" ng-if="ctrl.errorMessage">{{ ctrl.errorMessage }}</div>
-  </div>
 
+      <ol>
+        <li ng-repeat="it in narrowItDown.found">
+          {{ it.matchitems.name }} ---
+          {{ it.matchitems.short_name }} ---
+          {{ it.matchitems.description }}
+        </li>
+      </ol>
+
+
+
+  <script src="js/jquery-3.1.0.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>

@@ -1,0 +1,15 @@
+<div class="container ng-scope" ngIf="myCtrl.containsItems()">
+
+  <div class="row">
+    <ol>
+      <li ng-repeat="category in myCtrl.mylist.found">
+        {{ category.matchitems.name }} ---
+        {{ category.matchitems.short_name }} ---
+        {{ category.matchitems.description }}
+      </li>
+
+      <!-- <li ng-repeat="item in narrowItDown">{{ item.name }}</li> -->
+    </ol>
+
+  </div>
+</div>
